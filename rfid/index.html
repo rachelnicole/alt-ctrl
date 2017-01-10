@@ -1,0 +1,106 @@
+<html>
+  <head>
+    <title>ｗｅｌｃｏｍｅ 2 ｃｙｂｅｒｓｐａｃｅ</title>
+    <link rel="stylesheet" type="text/css" href="public/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="hack-type">
+      <div class="mainframe">
+      </div>
+      <div class="cli" id="cli-screen">
+        <p class="loading">Verifying Credentials</p>
+      </div>
+    </div>
+    <script src="http://localhost:3030/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect('http://localhost:3030/');
+      socket.on("access", function(accessText) {  
+        // todo: add the tweet as a DOM node
+        $('.cli').append(accessText);
+      });
+
+      socket.on("accessGranted", function(accessText) {
+        var cycle = 0;
+        var intervalID = window.setInterval(updateScreen, 200);
+        var c = document.getElementById("cli-screen");
+        var txt = [
+          "FORCE: XX0022. ENCYPT://000.222.2345",
+          "TRYPASS: ********* AUTH CODE: ALPHA GAMMA: 1___ PRIORITY 1",
+          "RETRY: HELLO NODE INTERACTIVE",
+          "Z:> /OHHOE/CYBORG/RFID/ EXECUTE",
+          "================================================",
+          "Priority 1 // local / scanning...",
+          "scanning ports...",
+          "BACKDOOR FOUND (23.45.23.12.00000000)",
+          "BACKDOOR FOUND (13.66.23.12.00110000)",
+          "BACKDOOR FOUND (13.66.23.12.00110044)",
+          "...",
+          "...",
+          "BRUTE.EXE -r -z",
+          "...locating vulnerabilities...",
+          "...vulnerabilities found...",
+          "MCP/> DEPLOY CLU",
+          "SCAN: __ 0100.0000.0554.0080",
+          "SCAN: __ 0020.0000.0553.0080",
+          "SCAN: __ 0001.0000.0554.0550",
+          "SCAN: __ 0012.0000.0553.0030",
+          "SCAN: __ 0100.0000.0554.0080",
+          "SCAN: __ 0020.0000.0553.0080",
+        ];
+        var txt2 = [
+"       ______",
+"    .-\"      \"-.",
+"   /             \\",
+"  |              |",
+"  |,  .-.  .-.  ,|",
+"  | )(__/  \\__)( |",
+"  |/     /\\     \\|",
+"  (_     ^^     _)",
+"   \\__|IIIIII|__/",
+"    |-\\IIIIII|-|",
+"    \\          /",
+"     `--------`",
+"**********************",
+"****** ACCESS ********",
+"****** GRANTED *******",
+"**********************",
+        ]
+
+        var docfrag = document.createDocumentFragment();
+
+        function updateScreen() {
+          //Shuffle the "txt" array
+          txt.push(txt.shift());
+          //Rebuild document fragment
+          txt.forEach(function(e) {
+            var p = document.createElement("p");
+            p.textContent = e;
+            docfrag.appendChild(p);
+          });
+          //Clear DOM body
+          while (c.firstChild) {
+            c.removeChild(c.firstChild);
+          }
+          c.appendChild(docfrag);
+
+          if (++cycle === 15) {
+            window.clearInterval(intervalID);
+            txt2.push(txt2.shift());
+
+            txt2.forEach(function(e) {
+              var p = document.createElement("p");
+              p.textContent = e;
+              docfrag.appendChild(p);
+            });
+            //Clear DOM body
+            while (c.firstChild) {
+              c.removeChild(c.firstChild);
+            }
+            c.appendChild(docfrag);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
